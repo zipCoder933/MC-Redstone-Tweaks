@@ -19,6 +19,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ModelEvent;
 import net.minecraftforge.client.event.RenderLevelStageEvent;
+import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -51,30 +52,23 @@ public class ModRedstonePen {
         ModContent.init();
         bus.addListener(LiveCycleEvents::onSetup);
         bus.addListener(LiveCycleEvents::onRegister);
-        CREATIVE_MODE_TABS.register(bus);
+        // Register the item to a creative tab
+        bus.addListener(this::addCreative);
     }
-
-    // -------------------------------------------------------------------------------------------------------------------
-    // Createive Mode Tab
-    // -------------------------------------------------------------------------------------------------------------------
-
-    public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(net.minecraft.core.registries.Registries.CREATIVE_MODE_TAB, MODID);
-    public static final RegistryObject<CreativeModeTab> EXAMPLE_TAB = CREATIVE_MODE_TABS.register(
-            "tab_" + MODID, () -> CreativeModeTab.builder()
-                    .title(Component.translatable("itemGroup.tabredstonepen"))
-                    .withTabsBefore(CreativeModeTabs.COMBAT)
-                    .icon(() -> new ItemStack(Registries.getItem("pen")))
-                    .displayItems((parameters, output) -> Registries.getRegisteredItems().forEach(
-                            it -> {
-                                if (!(it instanceof BlockItem bit) || (bit.getBlock() != ModContent.references.TRACK_BLOCK))
-                                    output.accept(it);
-                            })
-                    ).build()
-    );
-
     // -------------------------------------------------------------------------------------------------------------------
     // Events
     // -------------------------------------------------------------------------------------------------------------------
+
+    // Add the example block item to the building blocks tab
+    private void addCreative(BuildCreativeModeTabContentsEvent event) {
+        if (event.getTabKey() == CreativeModeTabs.REDSTONE_BLOCKS) {
+            Registries.getRegisteredItems().forEach(
+                    it -> {
+                        if (!(it instanceof BlockItem bit) || (bit.getBlock() != ModContent.references.TRACK_BLOCK))
+                            event.accept(it);
+                    });
+        }
+    }
 
     private static class LiveCycleEvents {
         private static void onSetup(final FMLCommonSetupEvent event) {
