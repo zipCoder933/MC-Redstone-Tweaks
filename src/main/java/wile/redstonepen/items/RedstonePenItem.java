@@ -34,7 +34,6 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import wile.redstonepen.ModConstants;
 import wile.redstonepen.ModContent;
 import wile.redstonepen.blocks.CircuitComponents;
 import wile.redstonepen.blocks.ControlBox;
@@ -46,6 +45,8 @@ import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static wile.redstonepen.ModRedstonePen.MODID;
 
 
 @SuppressWarnings("deprecation")
@@ -61,11 +62,11 @@ public class RedstonePenItem extends StandardItems.BaseItem
   public void appendHoverText(ItemStack stack, @Nullable Level world, List<Component> tooltip, TooltipFlag flag)
   {
     if(getMaxDamage()>0) {
-      tooltip.add(Auxiliaries.localizable("item."+ ModConstants.MODID + ".pen.tooltip.numstored", getMaxDamage()-stack.getDamageValue()));
+      tooltip.add(Utils.localizable("item."+ MODID + ".pen.tooltip.numstored", getMaxDamage()-stack.getDamageValue()));
     } else {
-      tooltip.add(Auxiliaries.localizable("item."+ ModConstants.MODID + ".pen.tooltip.rsfrominventory"));
+      tooltip.add(Utils.localizable("item."+ MODID + ".pen.tooltip.rsfrominventory"));
     }
-    Auxiliaries.Tooltip.addInformation(stack, world, tooltip, flag, true);
+    Utils.Tooltip.addInformation(stack, world, tooltip, flag, true);
   }
 
   @Override
@@ -222,32 +223,32 @@ public class RedstonePenItem extends StandardItems.BaseItem
     final Direction rs_side = brtr.getDirection().getOpposite();
     MutableComponent tc = Component.empty();
     if(block == Blocks.REDSTONE_WIRE) {
-      tc = Auxiliaries.localizable("overlay.wire_power", powerFormatted(state.getValue(RedStoneWireBlock.POWER)));
+      tc = Utils.localizable("overlay.wire_power", powerFormatted(state.getValue(RedStoneWireBlock.POWER)));
     } else if(block == ModContent.references.TRACK_BLOCK) {
       TrackBlockEntity te = RedstoneTrack.RedstoneTrackBlock.tile(world, pos).orElse(null);
       if(te==null) return;
-      tc = Auxiliaries.localizable("overlay.track_power", powerFormatted(te.getSidePower(rs_side)));
-      if(Auxiliaries.isDevelopmentMode()) {
+      tc = Utils.localizable("overlay.track_power", powerFormatted(te.getSidePower(rs_side)));
+      if(Utils.isDevelopmentMode()) {
         tc.append(Component.literal(String.format(" | flags: %016x, p: ", te.getStateFlags())));
         tc.append(Component.literal(Arrays.stream(Direction.values()).map(side->side.toString().substring(0,1) + te.getRedstonePower(side.getOpposite(), false)).collect(Collectors.joining(","))));
       }
     } else if(state.is(Blocks.REPEATER)) {
-      tc = Auxiliaries.localizable("overlay.direct_power", powerFormatted(state.getValue(RepeaterBlock.POWERED) ? 15 : 0));
-      tc.append(Auxiliaries.localizable("overlay.repeater_delay", state.getValue(RepeaterBlock.DELAY)));
+      tc = Utils.localizable("overlay.direct_power", powerFormatted(state.getValue(RepeaterBlock.POWERED) ? 15 : 0));
+      tc.append(Utils.localizable("overlay.repeater_delay", state.getValue(RepeaterBlock.DELAY)));
     } else if(state.is(Blocks.COMPARATOR)) {
       final BlockEntity te = world.getBlockEntity(pos);
       if(te instanceof ComparatorBlockEntity) {
-        tc = Auxiliaries.localizable("overlay.direct_power", powerFormatted(((ComparatorBlockEntity)te).getOutputSignal()));
+        tc = Utils.localizable("overlay.direct_power", powerFormatted(((ComparatorBlockEntity)te).getOutputSignal()));
         switch(state.getValue(ComparatorBlock.MODE)) {
-          case COMPARE: tc.append(Auxiliaries.localizable("overlay.comparator_compare")); break;
-          case SUBTRACT: tc.append(Auxiliaries.localizable("overlay.comparator_subtract")); break;
+          case COMPARE: tc.append(Utils.localizable("overlay.comparator_compare")); break;
+          case SUBTRACT: tc.append(Utils.localizable("overlay.comparator_subtract")); break;
           default: break;
         }
       }
     } else if(state.isSignalSource()) {
       int p = Math.max(state.getDirectSignal(world, pos, rs_side), state.getSignal(world, pos, rs_side));
       if(p > 0) {
-        tc = Auxiliaries.localizable("overlay.direct_power", powerFormatted(p));
+        tc = Utils.localizable("overlay.direct_power", powerFormatted(p));
       } else {
         Direction max_side = null;
         for(Direction side: Direction.values()) {
@@ -260,9 +261,9 @@ public class RedstonePenItem extends StandardItems.BaseItem
           }
         }
         if((p == 0) || (max_side==null)) {
-          tc = Auxiliaries.localizable("overlay.direct_power", powerFormatted(p));
+          tc = Utils.localizable("overlay.direct_power", powerFormatted(p));
         } else {
-          tc = Auxiliaries.localizable("overlay.direct_power_at", powerFormatted(p), max_side.getOpposite().toString());
+          tc = Utils.localizable("overlay.direct_power_at", powerFormatted(p), max_side.getOpposite().toString());
         }
       }
     } else if(RsSignals.canEmitWeakPower(state, world, pos, rs_side)) {
@@ -272,7 +273,7 @@ public class RedstonePenItem extends StandardItems.BaseItem
         int ps = world.getSignal(pos.relative(d), d);
         if(ps>p) { p = ps; max_side=d; if(p>=15){break;} }
       }
-      if(p > 0) tc = Auxiliaries.localizable("overlay.indirect_power", powerFormatted(p), max_side.toString()); // @todo: temporary workaround (direction untranslated). Direction may not have a component serialization since codecs are introduced.
+      if(p > 0) tc = Utils.localizable("overlay.indirect_power", powerFormatted(p), max_side.toString()); // @todo: temporary workaround (direction untranslated). Direction may not have a component serialization since codecs are introduced.
     }
     Overlay.show(player, tc, 400);
   }

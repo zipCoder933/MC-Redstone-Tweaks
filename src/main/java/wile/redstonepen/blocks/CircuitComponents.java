@@ -42,13 +42,15 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import wile.redstonepen.ModContent;
-import wile.redstonepen.libmc.Auxiliaries;
+import wile.redstonepen.libmc.Utils;
 import wile.redstonepen.libmc.Overlay;
 import wile.redstonepen.libmc.RsSignals;
 import wile.redstonepen.libmc.StandardBlocks;
 
 import javax.annotation.Nullable;
 import java.util.*;
+
+import static wile.redstonepen.ModRedstonePen.MOD_LOGGER;
 
 @SuppressWarnings("deprecation")
 public class CircuitComponents
@@ -132,45 +134,45 @@ public class CircuitComponents
       switch(state.getValue(FACING)) {
         case DOWN:
           switch(state.getValue(ROTATION)) {
-            case 0: return Auxiliaries.getUnionShape(Auxiliaries.getYRotatedAABB(aabb, 0));
-            case 1: return Auxiliaries.getUnionShape(Auxiliaries.getYRotatedAABB(aabb, 1));
-            case 2: return Auxiliaries.getUnionShape(Auxiliaries.getYRotatedAABB(aabb, 2));
-            case 3: return Auxiliaries.getUnionShape(Auxiliaries.getYRotatedAABB(aabb, 3));
+            case 0: return Utils.getUnionShape(Utils.getYRotatedAABB(aabb, 0));
+            case 1: return Utils.getUnionShape(Utils.getYRotatedAABB(aabb, 1));
+            case 2: return Utils.getUnionShape(Utils.getYRotatedAABB(aabb, 2));
+            case 3: return Utils.getUnionShape(Utils.getYRotatedAABB(aabb, 3));
           }
         case UP:
           switch(state.getValue(ROTATION)) {
-            case 0: return Auxiliaries.getUnionShape(Auxiliaries.getMirroredAABB(Auxiliaries.getYRotatedAABB(aabb, 0), Direction.Axis.Y));
-            case 1: return Auxiliaries.getUnionShape(Auxiliaries.getMirroredAABB(Auxiliaries.getYRotatedAABB(aabb, 1), Direction.Axis.Y));
-            case 2: return Auxiliaries.getUnionShape(Auxiliaries.getMirroredAABB(Auxiliaries.getYRotatedAABB(aabb, 2), Direction.Axis.Y));
-            case 3: return Auxiliaries.getUnionShape(Auxiliaries.getMirroredAABB(Auxiliaries.getYRotatedAABB(aabb, 3), Direction.Axis.Y));
+            case 0: return Utils.getUnionShape(Utils.getMirroredAABB(Utils.getYRotatedAABB(aabb, 0), Direction.Axis.Y));
+            case 1: return Utils.getUnionShape(Utils.getMirroredAABB(Utils.getYRotatedAABB(aabb, 1), Direction.Axis.Y));
+            case 2: return Utils.getUnionShape(Utils.getMirroredAABB(Utils.getYRotatedAABB(aabb, 2), Direction.Axis.Y));
+            case 3: return Utils.getUnionShape(Utils.getMirroredAABB(Utils.getYRotatedAABB(aabb, 3), Direction.Axis.Y));
           }
         case NORTH:
           switch(state.getValue(ROTATION)) {
-            case 0: return Auxiliaries.getUnionShape(Auxiliaries.getRotatedAABB(Auxiliaries.getRotatedAABB(aabb, Direction.SOUTH), Direction.DOWN));
-            case 1: return Auxiliaries.getUnionShape(Auxiliaries.getRotatedAABB(Auxiliaries.getRotatedAABB(aabb, Direction.WEST), Direction.DOWN));
-            case 2: return Auxiliaries.getUnionShape(Auxiliaries.getRotatedAABB(Auxiliaries.getRotatedAABB(aabb, Direction.NORTH), Direction.DOWN));
-            case 3: return Auxiliaries.getUnionShape(Auxiliaries.getRotatedAABB(Auxiliaries.getRotatedAABB(aabb, Direction.EAST), Direction.DOWN));
+            case 0: return Utils.getUnionShape(Utils.getRotatedAABB(Utils.getRotatedAABB(aabb, Direction.SOUTH), Direction.DOWN));
+            case 1: return Utils.getUnionShape(Utils.getRotatedAABB(Utils.getRotatedAABB(aabb, Direction.WEST), Direction.DOWN));
+            case 2: return Utils.getUnionShape(Utils.getRotatedAABB(Utils.getRotatedAABB(aabb, Direction.NORTH), Direction.DOWN));
+            case 3: return Utils.getUnionShape(Utils.getRotatedAABB(Utils.getRotatedAABB(aabb, Direction.EAST), Direction.DOWN));
           }
         case EAST:
           switch(state.getValue(ROTATION)) {
-            case 0: return Auxiliaries.getUnionShape(Auxiliaries.getYRotatedAABB(Auxiliaries.getRotatedAABB(Auxiliaries.getRotatedAABB(aabb, Direction.UP), Direction.WEST), 0));
-            case 1: return Auxiliaries.getUnionShape(Auxiliaries.getYRotatedAABB(Auxiliaries.getRotatedAABB(Auxiliaries.getRotatedAABB(aabb, Direction.WEST), Direction.DOWN), 1));
-            case 2: return Auxiliaries.getUnionShape(Auxiliaries.getYRotatedAABB(Auxiliaries.getRotatedAABB(Auxiliaries.getRotatedAABB(aabb, Direction.SOUTH), Direction.UP), 3));
-            case 3: return Auxiliaries.getUnionShape(Auxiliaries.getYRotatedAABB(Auxiliaries.getRotatedAABB(Auxiliaries.getRotatedAABB(aabb, Direction.WEST), Direction.UP), 3));
+            case 0: return Utils.getUnionShape(Utils.getYRotatedAABB(Utils.getRotatedAABB(Utils.getRotatedAABB(aabb, Direction.UP), Direction.WEST), 0));
+            case 1: return Utils.getUnionShape(Utils.getYRotatedAABB(Utils.getRotatedAABB(Utils.getRotatedAABB(aabb, Direction.WEST), Direction.DOWN), 1));
+            case 2: return Utils.getUnionShape(Utils.getYRotatedAABB(Utils.getRotatedAABB(Utils.getRotatedAABB(aabb, Direction.SOUTH), Direction.UP), 3));
+            case 3: return Utils.getUnionShape(Utils.getYRotatedAABB(Utils.getRotatedAABB(Utils.getRotatedAABB(aabb, Direction.WEST), Direction.UP), 3));
           }
         case SOUTH:
           switch(state.getValue(ROTATION)) {
-            case 0: return Auxiliaries.getUnionShape(Auxiliaries.getRotatedAABB(Auxiliaries.getRotatedAABB(aabb, Direction.NORTH), Direction.UP));
-            case 1: return Auxiliaries.getUnionShape(Auxiliaries.getRotatedAABB(Auxiliaries.getRotatedAABB(aabb, Direction.EAST), Direction.UP));
-            case 2: return Auxiliaries.getUnionShape(Auxiliaries.getRotatedAABB(Auxiliaries.getRotatedAABB(aabb, Direction.SOUTH), Direction.UP));
-            case 3: return Auxiliaries.getUnionShape(Auxiliaries.getRotatedAABB(Auxiliaries.getRotatedAABB(aabb, Direction.WEST), Direction.UP));
+            case 0: return Utils.getUnionShape(Utils.getRotatedAABB(Utils.getRotatedAABB(aabb, Direction.NORTH), Direction.UP));
+            case 1: return Utils.getUnionShape(Utils.getRotatedAABB(Utils.getRotatedAABB(aabb, Direction.EAST), Direction.UP));
+            case 2: return Utils.getUnionShape(Utils.getRotatedAABB(Utils.getRotatedAABB(aabb, Direction.SOUTH), Direction.UP));
+            case 3: return Utils.getUnionShape(Utils.getRotatedAABB(Utils.getRotatedAABB(aabb, Direction.WEST), Direction.UP));
           }
         case WEST:
           switch(state.getValue(ROTATION)) {
-            case 0: return Auxiliaries.getUnionShape(Auxiliaries.getRotatedAABB(Auxiliaries.getRotatedAABB(aabb, Direction.UP), Direction.EAST));
-            case 1: return Auxiliaries.getUnionShape(Auxiliaries.getYRotatedAABB(Auxiliaries.getRotatedAABB(Auxiliaries.getRotatedAABB(aabb, Direction.EAST), Direction.UP), 1));
-            case 2: return Auxiliaries.getUnionShape(Auxiliaries.getRotatedAABB(Auxiliaries.getRotatedAABB(aabb, Direction.DOWN), Direction.WEST));
-            case 3: return Auxiliaries.getUnionShape(Auxiliaries.getYRotatedAABB(Auxiliaries.getRotatedAABB(Auxiliaries.getRotatedAABB(aabb, Direction.WEST), Direction.UP), 1));
+            case 0: return Utils.getUnionShape(Utils.getRotatedAABB(Utils.getRotatedAABB(aabb, Direction.UP), Direction.EAST));
+            case 1: return Utils.getUnionShape(Utils.getYRotatedAABB(Utils.getRotatedAABB(Utils.getRotatedAABB(aabb, Direction.EAST), Direction.UP), 1));
+            case 2: return Utils.getUnionShape(Utils.getRotatedAABB(Utils.getRotatedAABB(aabb, Direction.DOWN), Direction.WEST));
+            case 3: return Utils.getUnionShape(Utils.getYRotatedAABB(Utils.getRotatedAABB(Utils.getRotatedAABB(aabb, Direction.WEST), Direction.UP), 1));
           }
       }
       return Shapes.block();
@@ -412,7 +414,7 @@ public class CircuitComponents
           world.updateNeighborsAtExceptFromFacing(adjacent_pos, state.getBlock(), facing.getOpposite());
         }
       } catch(Throwable ex) {
-        Auxiliaries.logError("Curcuit neighborChanged recursion detected, dropping!");
+        MOD_LOGGER.error("Curcuit neighborChanged recursion detected, dropping!");
         Vec3 p = Vec3.atCenterOf(pos);
         world.addFreshEntity(new ItemEntity(world, p.x, p.y, p.z, new ItemStack(this, 1)));
         world.setBlock(pos, world.getBlockState(pos).getFluidState().createLegacyBlock(), 2|16);

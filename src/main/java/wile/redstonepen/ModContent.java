@@ -17,7 +17,7 @@ import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.AABB;
 import wile.redstonepen.blocks.*;
 import wile.redstonepen.items.RedstonePenItem;
-import wile.redstonepen.libmc.Auxiliaries;
+import wile.redstonepen.libmc.Utils;
 import wile.redstonepen.libmc.Registries;
 import wile.redstonepen.libmc.StandardBlocks;
 
@@ -44,7 +44,7 @@ public class ModContent
       ()->new CircuitComponents.RelayBlock(
         StandardBlocks.CFG_CUTOUT,
         BlockBehaviour.Properties.of().noCollission().instabreak(),
-        Auxiliaries.getPixeledAABB(5,0,0, 11,1,16)
+        Utils.getPixeledAABB(5,0,0, 11,1,16)
       ),
       CircuitComponents.DirectedComponentBlockItem::new
     );
@@ -52,7 +52,7 @@ public class ModContent
       ()->new CircuitComponents.InvertedRelayBlock(
         StandardBlocks.CFG_CUTOUT,
         BlockBehaviour.Properties.of().noCollission().instabreak(),
-        Auxiliaries.getPixeledAABB(5,0,0, 11,1,16)
+        Utils.getPixeledAABB(5,0,0, 11,1,16)
       ),
       CircuitComponents.DirectedComponentBlockItem::new
     );
@@ -60,7 +60,7 @@ public class ModContent
       ()->new CircuitComponents.BistableRelayBlock(
         StandardBlocks.CFG_CUTOUT,
         BlockBehaviour.Properties.of().noCollission().instabreak(),
-        Auxiliaries.getPixeledAABB(5,0,0, 11,1,16)
+        Utils.getPixeledAABB(5,0,0, 11,1,16)
       ),
       CircuitComponents.DirectedComponentBlockItem::new
     );
@@ -68,7 +68,7 @@ public class ModContent
       ()->new CircuitComponents.PulseRelayBlock(
         StandardBlocks.CFG_CUTOUT,
         BlockBehaviour.Properties.of().noCollission().instabreak(),
-        Auxiliaries.getPixeledAABB(5,0,0, 11,1,16)
+        Utils.getPixeledAABB(5,0,0, 11,1,16)
       ),
       CircuitComponents.DirectedComponentBlockItem::new
     );
@@ -76,7 +76,7 @@ public class ModContent
       ()->new CircuitComponents.BridgeRelayBlock(
         StandardBlocks.CFG_CUTOUT,
         BlockBehaviour.Properties.of().noCollission().instabreak(),
-        Auxiliaries.getPixeledAABB(5,0,0, 11,1,16)
+        Utils.getPixeledAABB(5,0,0, 11,1,16)
       ),
       CircuitComponents.DirectedComponentBlockItem::new
     );
@@ -85,8 +85,8 @@ public class ModContent
         StandardBlocks.CFG_CUTOUT,
         BlockBehaviour.Properties.of().noCollission().instabreak(),
         new AABB[]{
-          Auxiliaries.getPixeledAABB(0,0,0, 16,2,16),
-          Auxiliaries.getPixeledAABB(3,1,3, 13,3.9,13)
+          Utils.getPixeledAABB(0,0,0, 16,2,16),
+          Utils.getPixeledAABB(3,1,3, 13,3.9,13)
         }
       ),
       CircuitComponents.DirectedComponentBlockItem::new,

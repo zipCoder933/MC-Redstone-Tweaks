@@ -31,6 +31,8 @@ import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 
+import static wile.redstonepen.ModRedstonePen.MOD_LOGGER;
+
 public class ExtendedShapelessRecipe extends ShapelessRecipe implements CraftingRecipe
 {
   public interface IRepairableToolItem
@@ -74,7 +76,7 @@ public class ExtendedShapelessRecipe extends ShapelessRecipe implements Crafting
       final ItemStack stack = inv.getItem(i);
       if(stack.isEmpty()) {
         continue;
-      } else if(Auxiliaries.getResourceLocation(stack.getItem()).toString().equals(tool_name)) {
+      } else if(Utils.getResourceLocation(stack.getItem()).toString().equals(tool_name)) {
         tool_item = stack.copy();
       } else {
         remaining.set(i, stack.copy());
@@ -84,7 +86,7 @@ public class ExtendedShapelessRecipe extends ShapelessRecipe implements Crafting
     if(tool_item.isEmpty()) {
       return new Tuple<>(ItemStack.EMPTY, remaining);
     } else if(!tool_item.isDamageableItem()) {
-      Auxiliaries.logWarn("Repairing '" +  Auxiliaries.getResourceLocation(tool_item.getItem()) +"' can't work, the item is not damageable.");
+      MOD_LOGGER.warn("Repairing '" +  Utils.getResourceLocation(tool_item.getItem()) +"' can't work, the item is not damageable.");
       return new Tuple<>(ItemStack.EMPTY, remaining);
     } else {
       final int dmg = tool_item.getDamageValue();
@@ -102,7 +104,7 @@ public class ExtendedShapelessRecipe extends ShapelessRecipe implements Crafting
       for(int i=0; i<remaining.size(); ++i) {
         ItemStack stack = inv.getItem(i);
         if(stack.isEmpty()) continue;
-        if(Auxiliaries.getResourceLocation(stack.getItem()).toString().equals(tool_name)) continue;
+        if(Utils.getResourceLocation(stack.getItem()).toString().equals(tool_name)) continue;
         remaining.set(i, stack.hasCraftingRemainingItem() ? stack.getCraftingRemainingItem() : stack.copy());
       }
       for(int i=0; i<remaining.size(); ++i) {
@@ -154,7 +156,7 @@ public class ExtendedShapelessRecipe extends ShapelessRecipe implements Crafting
       NonNullList<ItemStack> remaining = NonNullList.withSize(inv.getContainerSize(), ItemStack.EMPTY);
       for(int i=0; i<remaining.size(); ++i) {
         final ItemStack stack = inv.getItem(i);
-        if(Auxiliaries.getResourceLocation(stack.getItem()).toString().equals(tool_name)) {
+        if(Utils.getResourceLocation(stack.getItem()).toString().equals(tool_name)) {
           if(!stack.isDamageableItem()) {
             remaining.set(i, stack);
           } else { // implicitly !repair
@@ -249,7 +251,7 @@ public class ExtendedShapelessRecipe extends ShapelessRecipe implements Crafting
         if(item==null) throw new JsonParseException(recipeId.getPath() + ": Result tag has no items: #" + rl);
         if(res.has("item")) res.remove("item");
         resultTag = rl;
-        res.addProperty("item", Auxiliaries.getResourceLocation(item).toString());
+        res.addProperty("item", Utils.getResourceLocation(item).toString());
       }
       ItemStack result_stack = ShapedRecipe.itemStackFromJson(res);
       return new ExtendedShapelessRecipe(recipeId, group, CraftingBookCategory.MISC, result_stack, list, aspects_nbt, resultTag);

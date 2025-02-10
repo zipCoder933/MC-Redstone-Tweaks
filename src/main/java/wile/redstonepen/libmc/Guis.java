@@ -27,10 +27,13 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import wile.redstonepen.client.TooltipDisplay;
 
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
+
+import static wile.redstonepen.ModRedstonePen.MODID;
 
 @SuppressWarnings("deprecation")
 public class Guis
@@ -50,7 +53,7 @@ public class Guis
     public ContainerGui(T menu, Inventory player_inv, Component title, String background_image, int width, int height)
     {
       super(menu, player_inv, title);
-      this.background_image_ = new ResourceLocation(Auxiliaries.modid(), background_image);
+      this.background_image_ = new ResourceLocation(MODID, background_image);
       this.player_ = player_inv.player;
       this.imageWidth = width;
       this.imageHeight = height;
@@ -60,7 +63,7 @@ public class Guis
     public ContainerGui(T menu, Inventory player_inv, Component title, String background_image)
     {
       super(menu, player_inv, title);
-      this.background_image_ = new ResourceLocation(Auxiliaries.modid(), background_image);
+      this.background_image_ = new ResourceLocation(MODID, background_image);
       this.player_ = player_inv.player;
       gui_background_ = new BackgroundImage(background_image_, imageWidth, imageHeight, Coord2d.ORIGIN);
     }

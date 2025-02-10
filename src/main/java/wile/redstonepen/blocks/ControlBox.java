@@ -33,12 +33,16 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import wile.redstonepen.ModContent;
+import wile.redstonepen.client.GuiTextEditing;
+import wile.redstonepen.client.TooltipDisplay;
 import wile.redstonepen.libmc.*;
 
 import javax.annotation.Nullable;
 import java.util.*;
 import java.util.function.BiFunction;
 import java.util.stream.Collectors;
+
+import static wile.redstonepen.ModRedstonePen.MOD_LOGGER;
 
 
 @SuppressWarnings("deprecation")
@@ -81,7 +85,7 @@ public class ControlBox {
         @Override
         @OnlyIn(Dist.CLIENT)
         public void appendHoverText(ItemStack stack, @Nullable BlockGetter world, List<Component> tooltip, TooltipFlag flag) {
-            if (Auxiliaries.Tooltip.addInformation(stack, world, tooltip, flag, true)) return;
+            if (Utils.Tooltip.addInformation(stack, world, tooltip, flag, true)) return;
             if ((stack.getTag() == null) || (!stack.getTag().contains("tedata")) || (!stack.getTag().getCompound("tedata").contains("logic")))
                 return;
             Arrays.stream(stack.getTag().getCompound("tedata").getCompound("logic").getString("code").split("\\n"))
@@ -101,7 +105,7 @@ public class ControlBox {
                 CompoundTag te_nbt = nbt.getCompound("tedata");
                 if (!te_nbt.isEmpty()) cbe.readnbt(te_nbt);
             }
-            cbe.setCustomName(Auxiliaries.getItemLabel(stack));
+            cbe.setCustomName(Utils.getItemLabel(stack));
             te.setChanged();
         }
 
@@ -164,7 +168,7 @@ public class ControlBox {
 
         public void readnbt(CompoundTag nbt) {
             if (nbt.contains("name", Tag.TAG_STRING))
-                custom_name_ = Auxiliaries.unserializeTextComponent(nbt.getString("name"));
+                custom_name_ = Utils.unserializeTextComponent(nbt.getString("name"));
             final CompoundTag logic_data = nbt.contains("logic", Tag.TAG_COMPOUND) ? nbt.getCompound("logic") : new CompoundTag();
             logic_.code(logic_data.getString("code"));
             logic_.input_data = logic_data.getInt("input");
@@ -176,7 +180,7 @@ public class ControlBox {
         }
 
         private void writenbt(CompoundTag nbt) {
-            if (custom_name_ != null) nbt.putString("name", Auxiliaries.serializeTextComponent(custom_name_));
+            if (custom_name_ != null) nbt.putString("name", Utils.serializeTextComponent(custom_name_));
             final CompoundTag logic_data = new CompoundTag();
             logic_data.putString("code", logic_.code());
             logic_data.putInt("input", logic_.input_data);
@@ -305,7 +309,7 @@ public class ControlBox {
                         world.blockEntityChanged(device_pos);
                 }
             } catch (Throwable ex) {
-                Auxiliaries.logError("RLC tick exception!" + ex);
+              MOD_LOGGER.error("RLC tick exception!" + ex);
                 world.removeBlock(getBlockPos(), true);
                 return;
             }
@@ -376,7 +380,7 @@ public class ControlBox {
 
         public void toggle_trace(@Nullable Player player) {
             trace_ = !trace_;
-            if (player != null) Auxiliaries.playerChatMessage(player, "Trace: " + trace_);
+            if (player != null) Utils.playerChatMessage(player, "Trace: " + trace_);
         }
 
         public boolean trace_enabled() {
@@ -598,23 +602,23 @@ public class ControlBox {
             {
                 textbox.init(this, Guis.Coord2d.of(29, 12)).setFontColor(0xdddddd).setCursorColor(0xdddddd).setLineHeight(7).onValueChanged((tb) -> push_code(textbox.getValue()));
                 addRenderableWidget(textbox);
-                start_stop.init(this, Guis.Coord2d.of(196, 14)).tooltip(Auxiliaries.localizable(tooltip_prefix + ".tooltips.runstop"));
+                start_stop.init(this, Guis.Coord2d.of(196, 14)).tooltip(Utils.localizable(tooltip_prefix + ".tooltips.runstop"));
                 start_stop.onclick((cb) -> {
                     final CompoundTag nbt = new CompoundTag();
                     getMenu().onGuiAction("enabled", nbt);
                     focus_editor_ = true;
                 });
                 addRenderableWidget(start_stop);
-                cb_copy_all.init(this, Guis.Coord2d.of(212, 14)).tooltip(Auxiliaries.localizable(tooltip_prefix + ".tooltips.copyall"));
+                cb_copy_all.init(this, Guis.Coord2d.of(212, 14)).tooltip(Utils.localizable(tooltip_prefix + ".tooltips.copyall"));
                 cb_copy_all.onclick((cb) -> {
-                    Auxiliaries.setClipboard(textbox.getValue());
+                    Utils.setClipboard(textbox.getValue());
                     focus_editor_ = true;
                 });
                 cb_copy_all.visible = false;
                 addRenderableWidget(cb_copy_all);
-                cb_paste_all.init(this, Guis.Coord2d.of(212, 14)).tooltip(Auxiliaries.localizable(tooltip_prefix + ".tooltips.pasteall"));
+                cb_paste_all.init(this, Guis.Coord2d.of(212, 14)).tooltip(Utils.localizable(tooltip_prefix + ".tooltips.pasteall"));
                 cb_paste_all.onclick((cb) -> {
-                    textbox.setValue(Auxiliaries.getClipboard().orElse(""));
+                    textbox.setValue(Utils.getClipboard().orElse(""));
                     push_code(textbox.getValue());
                     focus_editor_ = true;
                 });
@@ -625,7 +629,7 @@ public class ControlBox {
                 addRenderableWidget(cb_error_indicator);
                 rca_enabled_indicator.init(this, Guis.Coord2d.of(194, 40));
                 rca_enabled_indicator.visible = false;
-                rca_enabled_indicator.tooltip((rcae) -> Auxiliaries.localizable(tooltip_prefix + ".tooltips.rcaplayer", activating_player_));
+                rca_enabled_indicator.tooltip((rcae) -> Utils.localizable(tooltip_prefix + ".tooltips.rcaplayer", activating_player_));
                 addRenderableWidget(rca_enabled_indicator);
             }
             {
@@ -678,18 +682,18 @@ public class ControlBox {
                     return c;
                 }));
                 tooltips.add(new TooltipDisplay.TipRange(getGuiLeft() + 196, getGuiTop() + 14, 16, 16, () ->
-                        (errors_.isEmpty()) ? (Component.empty()) : (Auxiliaries.localizable(tooltip_prefix + ".error." + errors_.get(0).getB()))
+                        (errors_.isEmpty()) ? (Component.empty()) : (Utils.localizable(tooltip_prefix + ".error." + errors_.get(0).getB()))
                 ));
-                tooltips.add(new TooltipDisplay.TipRange(getGuiLeft() + 18, getGuiTop() + 12, 5, 8, Auxiliaries.localizable(tooltip_prefix + ".help.1")));
-                tooltips.add(new TooltipDisplay.TipRange(getGuiLeft() + 18, getGuiTop() + 22, 5, 3, Auxiliaries.localizable(tooltip_prefix + ".help.2")));
-                tooltips.add(new TooltipDisplay.TipRange(getGuiLeft() + 18, getGuiTop() + 27, 5, 5, Auxiliaries.localizable(tooltip_prefix + ".help.3")));
-                tooltips.add(new TooltipDisplay.TipRange(getGuiLeft() + 18, getGuiTop() + 34, 5, 5, Auxiliaries.localizable(tooltip_prefix + ".help.4")));
-                tooltips.add(new TooltipDisplay.TipRange(getGuiLeft() + 18, getGuiTop() + 41, 5, 6, Auxiliaries.localizable(tooltip_prefix + ".help.5")));
-                tooltips.add(new TooltipDisplay.TipRange(getGuiLeft() + 18, getGuiTop() + 49, 5, 4, Auxiliaries.localizable(tooltip_prefix + ".help.6")));
-                tooltips.add(new TooltipDisplay.TipRange(getGuiLeft() + 18, getGuiTop() + 55, 5, 5, Auxiliaries.localizable(tooltip_prefix + ".help.7")));
-                tooltips.add(new TooltipDisplay.TipRange(getGuiLeft() + 18, getGuiTop() + 62, 5, 3, Auxiliaries.localizable(tooltip_prefix + ".help.8")));
-                tooltips.add(new TooltipDisplay.TipRange(getGuiLeft() + 18, getGuiTop() + 67, 5, 7, Auxiliaries.localizable(tooltip_prefix + ".help.9")));
-                tooltips.add(new TooltipDisplay.TipRange(getGuiLeft() + 18, getGuiTop() + 76, 5, 3, Auxiliaries.localizable(tooltip_prefix + ".help.10")));
+                tooltips.add(new TooltipDisplay.TipRange(getGuiLeft() + 18, getGuiTop() + 12, 5, 8, Utils.localizable(tooltip_prefix + ".help.1")));
+                tooltips.add(new TooltipDisplay.TipRange(getGuiLeft() + 18, getGuiTop() + 22, 5, 3, Utils.localizable(tooltip_prefix + ".help.2")));
+                tooltips.add(new TooltipDisplay.TipRange(getGuiLeft() + 18, getGuiTop() + 27, 5, 5, Utils.localizable(tooltip_prefix + ".help.3")));
+                tooltips.add(new TooltipDisplay.TipRange(getGuiLeft() + 18, getGuiTop() + 34, 5, 5, Utils.localizable(tooltip_prefix + ".help.4")));
+                tooltips.add(new TooltipDisplay.TipRange(getGuiLeft() + 18, getGuiTop() + 41, 5, 6, Utils.localizable(tooltip_prefix + ".help.5")));
+                tooltips.add(new TooltipDisplay.TipRange(getGuiLeft() + 18, getGuiTop() + 49, 5, 4, Utils.localizable(tooltip_prefix + ".help.6")));
+                tooltips.add(new TooltipDisplay.TipRange(getGuiLeft() + 18, getGuiTop() + 55, 5, 5, Utils.localizable(tooltip_prefix + ".help.7")));
+                tooltips.add(new TooltipDisplay.TipRange(getGuiLeft() + 18, getGuiTop() + 62, 5, 3, Utils.localizable(tooltip_prefix + ".help.8")));
+                tooltips.add(new TooltipDisplay.TipRange(getGuiLeft() + 18, getGuiTop() + 67, 5, 7, Utils.localizable(tooltip_prefix + ".help.9")));
+                tooltips.add(new TooltipDisplay.TipRange(getGuiLeft() + 18, getGuiTop() + 76, 5, 3, Utils.localizable(tooltip_prefix + ".help.10")));
                 tooltip_.init(tooltips).delay(50);
             }
             setInitialFocus(textbox);
@@ -758,7 +762,7 @@ public class ControlBox {
                             cb_error_indicator.tooltip(Component.empty());
                         } else {
                             Guis.Coord2d exy = textbox.getCoordinatesAtIndex(errors_.get(0).getA());
-                            cb_error_indicator.tooltip(Auxiliaries.localizable(tooltip_prefix + ".error." + errors_.get(0).getB()));
+                            cb_error_indicator.tooltip(Utils.localizable(tooltip_prefix + ".error." + errors_.get(0).getB()));
                             cb_error_indicator.visible = true;
                             cb_error_indicator.setX(exy.x);
                             cb_error_indicator.setY(exy.y + textbox.getLineHeight());

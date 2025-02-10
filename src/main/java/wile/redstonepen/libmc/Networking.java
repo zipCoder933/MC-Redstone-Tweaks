@@ -30,6 +30,8 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
+import static wile.redstonepen.ModRedstonePen.MOD_LOGGER;
+
 
 public class Networking
 {
@@ -346,7 +348,7 @@ public class Networking
 
     public static void sendToPlayer(Player player, Component message, int delay)
     {
-      if((!(player instanceof ServerPlayer splayer)) || Auxiliaries.isEmpty(message)) return;
+      if((!(player instanceof ServerPlayer splayer)) || Utils.isEmpty(message)) return;
       DEFAULT_CHANNEL.sendTo(new OverlayTextMessage(message, delay), splayer.connection.connection, NetworkDirection.PLAY_TO_CLIENT);
     }
 
@@ -371,7 +373,7 @@ public class Networking
         buf.writeComponent(pkt.data());
         buf.writeInt(pkt.delay());
       } catch(Throwable e) {
-        Auxiliaries.logger().error("OverlayTextMessage.toBytes() failed: " + e);
+        MOD_LOGGER.error("OverlayTextMessage.toBytes() failed: " + e);
       }
     }
 

@@ -4,7 +4,7 @@
  * @copyright (C) 2020 Stefan Wilhelm
  * @license MIT (see https://opensource.org/licenses/MIT)
  */
-package wile.redstonepen.detail;
+package wile.redstonepen.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -22,14 +22,15 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import wile.redstonepen.ModConstants;
 import wile.redstonepen.blocks.RedstoneTrack;
 import wile.redstonepen.blocks.RedstoneTrack.defs.connections;
-import wile.redstonepen.libmc.Auxiliaries;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static wile.redstonepen.ModRedstonePen.MODID;
+import static wile.redstonepen.ModRedstonePen.MOD_LOGGER;
 
 
 public class ModRenderers
@@ -49,7 +50,7 @@ public class ModRenderers
       List<ModelResourceLocation> resources_to_register = new ArrayList<>();
 
       RedstoneTrack.defs.models.STATE_WIRE_MAPPING.entrySet().forEach((kv->{
-        final ModelResourceLocation mrl = new ModelResourceLocation(new ResourceLocation(ModConstants.MODID, kv.getValue()), "inventory");
+        final ModelResourceLocation mrl = new ModelResourceLocation(new ResourceLocation(MODID, kv.getValue()), "inventory");
         for(int i=0; i<RedstoneTrack.defs.STATE_FLAG_WIR_COUNT; ++i) {
           if((kv.getKey() & (1L<<(RedstoneTrack.defs.STATE_FLAG_WIR_POS+i))) != 0) {
             model_rls[i] = mrl;
@@ -59,7 +60,7 @@ public class ModRenderers
         resources_to_register.add(mrl); //  net.neoforged.client.model.ForgeModelBakery.addSpecialModel(mrl);
       }));
       RedstoneTrack.defs.models.STATE_CONNECT_MAPPING.entrySet().forEach((kv->{
-        ModelResourceLocation mrl = new ModelResourceLocation(new ResourceLocation(ModConstants.MODID, kv.getValue()), "inventory");
+        ModelResourceLocation mrl = new ModelResourceLocation(new ResourceLocation(MODID, kv.getValue()), "inventory");
         for(int i=0; i<RedstoneTrack.defs.STATE_FLAG_CON_COUNT; ++i) {
           if((kv.getKey() & (1L<<(RedstoneTrack.defs.STATE_FLAG_CON_POS+i))) != 0) {
             modelc_rls[i] = mrl;
@@ -69,7 +70,7 @@ public class ModRenderers
         resources_to_register.add(mrl);
       }));
       RedstoneTrack.defs.models.STATE_CNTWIRE_MAPPING.entrySet().forEach((kv->{
-        ModelResourceLocation mrl = new ModelResourceLocation(new ResourceLocation(ModConstants.MODID, kv.getValue()), "inventory");
+        ModelResourceLocation mrl = new ModelResourceLocation(new ResourceLocation(MODID, kv.getValue()), "inventory");
         for(int i=0; i<RedstoneTrack.defs.STATE_FLAG_CON_COUNT; ++i) {
           if((kv.getKey() & (1L<<(RedstoneTrack.defs.STATE_FLAG_CON_POS+i))) != 0) {
             modelm_rls[i] = mrl;
@@ -150,8 +151,8 @@ public class ModRenderers
         }
       } catch(Throwable e) {
         if(--tesr_error_counter<=0) {
-          Auxiliaries.logError("TER was disabled because broken, exception was: " + e.getMessage());
-          Auxiliaries.logError(String.join("\n", Arrays.stream(e.getStackTrace()).map(StackTraceElement::toString).toList()));
+          MOD_LOGGER.error("TER was disabled because broken, exception was: " + e.getMessage());
+          MOD_LOGGER.error(String.join("\n", Arrays.stream(e.getStackTrace()).map(StackTraceElement::toString).toList()));
         }
       }
       mxs.popPose();

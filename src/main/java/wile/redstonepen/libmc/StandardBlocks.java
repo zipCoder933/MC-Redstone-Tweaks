@@ -114,7 +114,7 @@ public class StandardBlocks
     @Override
     @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, @Nullable BlockGetter world, List<Component> tooltip, TooltipFlag flag)
-    { Auxiliaries.Tooltip.addInformation(stack, world, tooltip, flag, true); }
+    { Utils.Tooltip.addInformation(stack, world, tooltip, flag, true); }
 
     @Override
     public RenderTypeHint getRenderTypeHint()
@@ -183,7 +183,7 @@ public class StandardBlocks
     private final VoxelShape vshape;
 
     public Cutout(long conf, Properties properties)
-    { this(conf, properties, Auxiliaries.getPixeledAABB(0, 0, 0, 16, 16,16 )); }
+    { this(conf, properties, Utils.getPixeledAABB(0, 0, 0, 16, 16,16 )); }
 
     public Cutout(long conf, Properties properties, AABB aabb)
     { this(conf, properties, Shapes.create(aabb)); }
@@ -294,7 +294,7 @@ public class StandardBlocks
         final boolean is_horizontal = ((config & CFG_HORIZIONTAL)!=0);
         Map<BlockState,VoxelShape> vshapes = new HashMap<>();
         for(BlockState state:states) {
-          vshapes.put(state, Auxiliaries.getUnionShape(Auxiliaries.getRotatedAABB(unrotatedAABBs, state.getValue(FACING), is_horizontal)));
+          vshapes.put(state, Utils.getUnionShape(Utils.getRotatedAABB(unrotatedAABBs, state.getValue(FACING), is_horizontal)));
         }
         return vshapes;
       });
@@ -357,9 +357,9 @@ public class StandardBlocks
     public AxisAligned(long config, Properties properties, final AABB[] unrotatedAABBs)
     {
       this(config, properties, ()-> new ArrayList<>(Arrays.asList(
-        Auxiliaries.getUnionShape(Auxiliaries.getRotatedAABB(unrotatedAABBs, Direction.EAST, false)),
-        Auxiliaries.getUnionShape(Auxiliaries.getRotatedAABB(unrotatedAABBs, Direction.UP, false)),
-        Auxiliaries.getUnionShape(Auxiliaries.getRotatedAABB(unrotatedAABBs, Direction.SOUTH, false)),
+        Utils.getUnionShape(Utils.getRotatedAABB(unrotatedAABBs, Direction.EAST, false)),
+        Utils.getUnionShape(Utils.getRotatedAABB(unrotatedAABBs, Direction.UP, false)),
+        Utils.getUnionShape(Utils.getRotatedAABB(unrotatedAABBs, Direction.SOUTH, false)),
         Shapes.block()
       )));
     }
@@ -445,7 +445,7 @@ public class StandardBlocks
       this(config, properties, (states)->{
         Map<BlockState,VoxelShape> vshapes = new HashMap<>();
         for(BlockState state:states) {
-          vshapes.put(state, Auxiliaries.getUnionShape(Auxiliaries.getRotatedAABB(unrotatedAABBs, state.getValue(HORIZONTAL_FACING), true)));
+          vshapes.put(state, Utils.getUnionShape(Utils.getRotatedAABB(unrotatedAABBs, state.getValue(HORIZONTAL_FACING), true)));
         }
         return vshapes;
       });
@@ -562,10 +562,10 @@ public class StandardBlocks
       for(BlockState state:getStateDefinition().getPossibleStates()) {
         {
           VoxelShape shape = ((base_aabb.getXsize()==0) || (base_aabb.getYsize()==0) || (base_aabb.getZsize()==0)) ? Shapes.empty() : Shapes.create(base_aabb);
-          if(state.getValue(NORTH)) shape = Shapes.joinUnoptimized(shape,Auxiliaries.getUnionShape(Auxiliaries.getRotatedAABB(side_aabb, Direction.NORTH, true)), BooleanOp.OR);
-          if(state.getValue(EAST))  shape = Shapes.joinUnoptimized(shape,Auxiliaries.getUnionShape(Auxiliaries.getRotatedAABB(side_aabb, Direction.EAST, true)), BooleanOp.OR);
-          if(state.getValue(SOUTH)) shape = Shapes.joinUnoptimized(shape,Auxiliaries.getUnionShape(Auxiliaries.getRotatedAABB(side_aabb, Direction.SOUTH, true)), BooleanOp.OR);
-          if(state.getValue(WEST))  shape = Shapes.joinUnoptimized(shape,Auxiliaries.getUnionShape(Auxiliaries.getRotatedAABB(side_aabb, Direction.WEST, true)), BooleanOp.OR);
+          if(state.getValue(NORTH)) shape = Shapes.joinUnoptimized(shape, Utils.getUnionShape(Utils.getRotatedAABB(side_aabb, Direction.NORTH, true)), BooleanOp.OR);
+          if(state.getValue(EAST))  shape = Shapes.joinUnoptimized(shape, Utils.getUnionShape(Utils.getRotatedAABB(side_aabb, Direction.EAST, true)), BooleanOp.OR);
+          if(state.getValue(SOUTH)) shape = Shapes.joinUnoptimized(shape, Utils.getUnionShape(Utils.getRotatedAABB(side_aabb, Direction.SOUTH, true)), BooleanOp.OR);
+          if(state.getValue(WEST))  shape = Shapes.joinUnoptimized(shape, Utils.getUnionShape(Utils.getRotatedAABB(side_aabb, Direction.WEST, true)), BooleanOp.OR);
           if(shape.isEmpty()) shape = Shapes.block();
           build_shapes.put(state.setValue(WATERLOGGED, false), shape);
           build_shapes.put(state.setValue(WATERLOGGED, true), shape);
@@ -573,13 +573,13 @@ public class StandardBlocks
         {
           // how the hack to extend a shape, these are the above with y+4px.
           VoxelShape shape = ((base_aabb.getXsize()==0) || (base_aabb.getYsize()==0) || (base_aabb.getZsize()==0)) ? Shapes.empty() : Shapes.create(base_aabb);
-          if(state.getValue(NORTH)) shape = Shapes.joinUnoptimized(shape,Auxiliaries.getUnionShape(Auxiliaries.getMappedAABB(Auxiliaries.getRotatedAABB(side_aabb,
+          if(state.getValue(NORTH)) shape = Shapes.joinUnoptimized(shape, Utils.getUnionShape(Utils.getMappedAABB(Utils.getRotatedAABB(side_aabb,
             Direction.NORTH, true), bb->bb.expandTowards(0, railing_height_extension, 0))), BooleanOp.OR);
-          if(state.getValue(EAST))  shape = Shapes.joinUnoptimized(shape,Auxiliaries.getUnionShape(Auxiliaries.getMappedAABB(Auxiliaries.getRotatedAABB(side_aabb,
+          if(state.getValue(EAST))  shape = Shapes.joinUnoptimized(shape, Utils.getUnionShape(Utils.getMappedAABB(Utils.getRotatedAABB(side_aabb,
             Direction.EAST, true), bb->bb.expandTowards(0, railing_height_extension, 0))), BooleanOp.OR);
-          if(state.getValue(SOUTH)) shape = Shapes.joinUnoptimized(shape,Auxiliaries.getUnionShape(Auxiliaries.getMappedAABB(Auxiliaries.getRotatedAABB(side_aabb,
+          if(state.getValue(SOUTH)) shape = Shapes.joinUnoptimized(shape, Utils.getUnionShape(Utils.getMappedAABB(Utils.getRotatedAABB(side_aabb,
             Direction.SOUTH, true), bb->bb.expandTowards(0, railing_height_extension, 0))), BooleanOp.OR);
-          if(state.getValue(WEST))  shape = Shapes.joinUnoptimized(shape,Auxiliaries.getUnionShape(Auxiliaries.getMappedAABB(Auxiliaries.getRotatedAABB(side_aabb,
+          if(state.getValue(WEST))  shape = Shapes.joinUnoptimized(shape, Utils.getUnionShape(Utils.getMappedAABB(Utils.getRotatedAABB(side_aabb,
             Direction.WEST, true), bb->bb.expandTowards(0, railing_height_extension, 0))), BooleanOp.OR);
           if(shape.isEmpty()) shape = Shapes.block();
           build_collision_shapes.put(state.setValue(WATERLOGGED, false), shape);

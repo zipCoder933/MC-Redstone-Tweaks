@@ -7,7 +7,7 @@
  * Delayed tooltip for a selected area. Constructed with a
  * GUI, invoked in `render()`.
  */
-package wile.redstonepen.libmc;
+package wile.redstonepen.client;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
@@ -18,12 +18,15 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import wile.redstonepen.libmc.Utils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Supplier;
+
+import static wile.redstonepen.ModRedstonePen.MOD_LOGGER;
 
 
 @OnlyIn(Dist.CLIENT)
@@ -104,11 +107,11 @@ public class TooltipDisplay
         final Component tip_component = tip.text.get();
         if(tip_component.getString().isEmpty()) return false;
         try {
-          final List<Component> lines = Auxiliaries.wrapText(tip_component, 80);
+          final List<Component> lines = Utils.wrapText(tip_component, 80);
           gg.renderTooltip(this.font, lines, Optional.empty(), x, y);
         } catch(Exception ex) {
           had_render_exception = true;
-          Auxiliaries.logError("Tooltip rendering disabled due to exception: '" + ex.getMessage() + "'");
+          MOD_LOGGER.error("Tooltip rendering disabled due to exception: '" + ex.getMessage() + "'");
           return false;
         }
         return true;
