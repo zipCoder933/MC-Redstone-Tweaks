@@ -1,10 +1,11 @@
 {
+	"credit": "Made with Blockbench",
 	"parent": "block/block",
 	"ambientocclusion": false,
 	"textures": {
 		"particle": "redstonepen:block/control_box_block_off",
 		"s": "redstonepen:block/control_box_block_off",
-    "b": "redstonepen:block/control_box_block_bottom"
+		"b": "redstonepen:block/control_box_block_bottom"
 	},
 	"elements": [
 		{
@@ -20,13 +21,13 @@
 			}
 		},
 		{
-			"from": [2.75, 1, 2.75],
-			"to": [13.25, 4, 13.25],
+			"from": [1.75, 1, 1.75],
+			"to": [14.25, 4, 14.25],
 			"faces": {
-				"north": {"uv": [3, 11, 13, 14], "texture": "#s"},
-				"east": {"uv": [3, 11, 13, 14], "rotation": 180, "texture": "#s"},
-				"south": {"uv": [13, 11, 3, 14], "texture": "#s"},
-				"west": {"uv": [3, 11, 13, 14], "texture": "#s"},
+				"north": {"uv": [3, 2, 13, 4], "texture": "#s"},
+				"east": {"uv": [12, 3, 14, 13], "rotation": 180, "texture": "#s"},
+				"south": {"uv": [13, 12, 3, 14], "texture": "#s"},
+				"west": {"uv": [2, 3, 4, 13], "texture": "#s"},
 				"up": {"uv": [3, 3, 13, 13], "rotation": 90, "texture": "#s"}
 			}
 		}
