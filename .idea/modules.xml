@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/org.zipcoder.redstonePen.main.iml" filepath="$PROJECT_DIR$/.idea/modules/org.zipcoder.redstonePen.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/org.zipcoder.redstonePen.test.iml" filepath="$PROJECT_DIR$/.idea/modules/org.zipcoder.redstonePen.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/redstonePen.main.iml" filepath="$PROJECT_DIR$/.idea/modules/redstonePen.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/redstonePen.test.iml" filepath="$PROJECT_DIR$/.idea/modules/redstonePen.test.iml" />
     </modules>
