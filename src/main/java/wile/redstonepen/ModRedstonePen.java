@@ -78,7 +78,6 @@ public class ModRedstonePen
     private static void onSetup(final FMLCommonSetupEvent event)
     {
       Networking.init(ModConstants.MODID);
-      wile.redstonepen.detail.RcaSync.CommonRca.init();
     }
 
     private static void onRegister(RegisterEvent event)
@@ -100,13 +99,6 @@ public class ModRedstonePen
       Overlay.TextOverlayGui.on_config(0.75, 0x00ffaa00, 0x55333333, 0x55333333, 0x55444444);
       BlockEntityRenderers.register((BlockEntityType<RedstoneTrack.TrackBlockEntity>)Registries.getBlockEntityTypeOfBlock("track"), wile.redstonepen.detail.ModRenderers.TrackTer::new);
       onRegisterMenuScreens(event);
-      // Player client tick if RCA existing.
-      if(wile.redstonepen.detail.RcaSync.ClientRca.init()) {
-        MinecraftForge.EVENT_BUS.addListener(EventPriority.LOWEST, (final TickEvent.PlayerTickEvent ev)->{
-          if(ev.phase != TickEvent.Phase.END) return;
-          wile.redstonepen.detail.RcaSync.ClientRca.tick();
-        });
-      }
     }
 
     @SuppressWarnings({"unchecked"})
