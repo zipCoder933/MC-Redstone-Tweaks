@@ -1,7 +1,7 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "org.zipcoder.rst.mixins",
+  "package": "wile.mixin",
   "compatibilityLevel": "JAVA_8",
   "refmap": "redstonepen.refmap.json",
   "mixins": [
