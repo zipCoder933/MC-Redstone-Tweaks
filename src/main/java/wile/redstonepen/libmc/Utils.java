@@ -41,7 +41,7 @@ import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import static wile.redstonepen.ModRedstonePen.MODID;
+import static zipCoder.redstonetweaks.RedstoneTweaks.MODID;
 
 
 public class Utils {

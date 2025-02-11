@@ -42,7 +42,7 @@ import java.util.*;
 import java.util.function.BiFunction;
 import java.util.stream.Collectors;
 
-import static zipCoder.redstonetweaks.RedstoneTweaks.MOD_LOGGER;
+import static wile.redstonepen.ModRedstonePen.MOD_LOGGER;
 
 
 @SuppressWarnings("deprecation")

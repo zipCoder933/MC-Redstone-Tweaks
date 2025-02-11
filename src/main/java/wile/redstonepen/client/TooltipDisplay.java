@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Supplier;
 
-import static wile.redstonepen.ModRedstonePen.MOD_LOGGER;
+import static zipCoder.redstonetweaks.RedstoneTweaks.MOD_LOGGER;
 
 
 @OnlyIn(Dist.CLIENT)

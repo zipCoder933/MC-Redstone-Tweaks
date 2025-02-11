@@ -27,8 +27,8 @@ import java.util.*;
 import java.util.function.BiFunction;
 import java.util.function.Supplier;
 
-import static wile.redstonepen.ModRedstonePen.MODID;
-import static wile.redstonepen.ModRedstonePen.MOD_LOGGER;
+import static zipCoder.redstonetweaks.RedstoneTweaks.MODID;
+import static zipCoder.redstonetweaks.RedstoneTweaks.MOD_LOGGER;
 
 
 public class Registries {

@@ -30,7 +30,7 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-import static wile.redstonepen.ModRedstonePen.MOD_LOGGER;
+import static zipCoder.redstonetweaks.RedstoneTweaks.MOD_LOGGER;
 
 
 public class Networking

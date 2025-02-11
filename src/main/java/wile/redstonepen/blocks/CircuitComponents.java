@@ -50,7 +50,7 @@ import wile.redstonepen.libmc.StandardBlocks;
 import javax.annotation.Nullable;
 import java.util.*;
 
-import static wile.redstonepen.ModRedstonePen.MOD_LOGGER;
+import static zipCoder.redstonetweaks.RedstoneTweaks.MOD_LOGGER;
 
 @SuppressWarnings("deprecation")
 public class CircuitComponents

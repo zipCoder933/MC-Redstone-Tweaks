@@ -4,16 +4,13 @@
  * @copyright (C) 2020 Stefan Wilhelm
  * @license MIT (see https://opensource.org/licenses/MIT)
  */
-package wile.redstonepen;
+package zipCoder.redstonetweaks;
 
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -26,27 +23,25 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegisterEvent;
-import net.minecraftforge.registries.RegistryObject;
 import org.slf4j.Logger;
+import wile.redstonepen.ModContent;
 import wile.redstonepen.blocks.ControlBox;
 import wile.redstonepen.blocks.RedstoneTrack;
 import wile.redstonepen.libmc.Networking;
 import wile.redstonepen.libmc.Overlay;
 import wile.redstonepen.libmc.Registries;
 
-import static wile.redstonepen.ModRedstonePen.MODID;
+import static zipCoder.redstonetweaks.RedstoneTweaks.MODID;
 
 
 @Mod(MODID)
-public class ModRedstonePen {
+public class RedstoneTweaks {
 
     public static final String MODID = "redstonepen";
-    public static final String MODNAME = "Redstone Pen";
     public static final Logger MOD_LOGGER = com.mojang.logging.LogUtils.getLogger();
 
-    public ModRedstonePen() {
+    public RedstoneTweaks() {
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         Registries.init();
         ModContent.init();

@@ -58,7 +58,7 @@ import javax.annotation.Nullable;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static wile.redstonepen.ModRedstonePen.MOD_LOGGER;
+import static zipCoder.redstonetweaks.RedstoneTweaks.MOD_LOGGER;
 
 @SuppressWarnings("deprecation")
 public class RedstoneTrack {

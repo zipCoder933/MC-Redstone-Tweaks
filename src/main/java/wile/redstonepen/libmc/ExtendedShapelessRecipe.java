@@ -31,7 +31,7 @@ import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 
-import static wile.redstonepen.ModRedstonePen.MOD_LOGGER;
+import static zipCoder.redstonetweaks.RedstoneTweaks.MOD_LOGGER;
 
 public class ExtendedShapelessRecipe extends ShapelessRecipe implements CraftingRecipe
 {

@@ -33,7 +33,7 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-import static wile.redstonepen.ModRedstonePen.MODID;
+import static zipCoder.redstonetweaks.RedstoneTweaks.MODID;
 
 @SuppressWarnings("deprecation")
 public class Guis

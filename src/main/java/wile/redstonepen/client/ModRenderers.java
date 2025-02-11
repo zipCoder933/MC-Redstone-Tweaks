@@ -29,8 +29,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static wile.redstonepen.ModRedstonePen.MODID;
-import static wile.redstonepen.ModRedstonePen.MOD_LOGGER;
+import static zipCoder.redstonetweaks.RedstoneTweaks.MODID;
+import static zipCoder.redstonetweaks.RedstoneTweaks.MOD_LOGGER;
 
 
 public class ModRenderers
