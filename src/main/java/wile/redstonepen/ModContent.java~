@@ -31,7 +31,7 @@ public class ModContent {
 
     public static void initBlocks() {
         /**
-         * Control box and redstone track are the ONLY blocks that are tile entities
+         * Control box and redstone track are the only blocks that are tile entities
          */
 
         Registries.addBlock("track", () -> new RedstoneTrack.RedstoneTrackBlock(StandardBlocks.CFG_DEFAULT, BlockBehaviour.Properties.of().noCollission().instabreak().dynamicShape().randomTicks()), RedstoneTrack.TrackBlockEntity::new);
