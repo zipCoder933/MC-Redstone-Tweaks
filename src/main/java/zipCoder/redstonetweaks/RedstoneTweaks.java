@@ -26,7 +26,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.RegisterEvent;
 import org.slf4j.Logger;
 import wile.redstonepen.ModContent;
-import wile.redstonepen.blocks.ControlBox;
+import wile.redstonepen.blocks.circuitComponents.ControlBox;
 import wile.redstonepen.blocks.RedstoneTrack;
 import wile.redstonepen.libmc.Networking;
 import wile.redstonepen.libmc.Overlay;
