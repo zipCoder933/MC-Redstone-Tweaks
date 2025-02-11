@@ -1,51 +1,21 @@
-package wile.redstonepen.blocks.circuitComponents;
+package wile.redstonepen.blocks.circuitComponents.relay;
 
-import com.google.common.collect.ImmutableList;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
-import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.RandomSource;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.*;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
-import net.minecraft.world.level.block.state.properties.IntegerProperty;
-import net.minecraft.world.level.material.PushReaction;
-import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.Vec3;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.Shapes;
-import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import wile.redstonepen.ModContent;
 import wile.redstonepen.blocks.RedstoneTrack;
-import wile.redstonepen.libmc.Utils;
-import wile.redstonepen.libmc.Overlay;
+import wile.redstonepen.blocks.circuitComponents.CircuitComponents;
 import wile.redstonepen.libmc.RsSignals;
-import wile.redstonepen.libmc.StandardBlocks;
-import javax.annotation.Nullable;
-import java.util.*;
-import static zipCoder.redstonetweaks.RedstoneTweaks.MOD_LOGGER;
 
-public class BridgeRelayBlock extends CircuitComponents.RelayBlock {
+import javax.annotation.Nullable;
+
+public class BridgeRelayBlock extends RelayBlock {
     private int power_update_recursion_level_ = 0;
 
     public BridgeRelayBlock(long config, Properties builder, AABB aabb) {

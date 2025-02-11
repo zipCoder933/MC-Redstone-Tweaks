@@ -18,7 +18,7 @@ import net.minecraft.world.phys.AABB;
 import wile.redstonepen.blocks.*;
 import wile.redstonepen.blocks.circuitComponents.CircuitComponents;
 import wile.redstonepen.blocks.circuitComponents.ControlBox;
-import wile.redstonepen.blocks.circuitComponents.*;
+import wile.redstonepen.blocks.circuitComponents.relay.*;
 import wile.redstonepen.items.RedstonePenItem;
 import wile.redstonepen.libmc.Utils;
 import wile.redstonepen.libmc.Registries;
@@ -38,7 +38,7 @@ public class ModContent {
          */
 
         Registries.addBlock("track", () -> new RedstoneTrack.RedstoneTrackBlock(StandardBlocks.CFG_DEFAULT, BlockBehaviour.Properties.of().noCollission().instabreak().dynamicShape().randomTicks()), RedstoneTrack.TrackBlockEntity::new);
-        Registries.addBlock("relay", () -> new CircuitComponents.RelayBlock(StandardBlocks.CFG_CUTOUT, BlockBehaviour.Properties.of().noCollission().instabreak(), Utils.getPixeledAABB(5, 0, 0, 11, 1, 16)), CircuitComponents.DirectedComponentBlockItem::new);
+        Registries.addBlock("relay", () -> new RelayBlock(StandardBlocks.CFG_CUTOUT, BlockBehaviour.Properties.of().noCollission().instabreak(), Utils.getPixeledAABB(5, 0, 0, 11, 1, 16)), CircuitComponents.DirectedComponentBlockItem::new);
         Registries.addBlock("inverted_relay", () -> new InvertedRelayBlock(StandardBlocks.CFG_CUTOUT, BlockBehaviour.Properties.of().noCollission().instabreak(), Utils.getPixeledAABB(5, 0, 0, 11, 1, 16)), CircuitComponents.DirectedComponentBlockItem::new);
         Registries.addBlock("bistable_relay", () -> new BistableRelayBlock(StandardBlocks.CFG_CUTOUT, BlockBehaviour.Properties.of().noCollission().instabreak(), Utils.getPixeledAABB(5, 0, 0, 11, 1, 16)), CircuitComponents.DirectedComponentBlockItem::new);
         Registries.addBlock("pulse_relay", () -> new PulseRelayBlock(StandardBlocks.CFG_CUTOUT, BlockBehaviour.Properties.of().noCollission().instabreak(), Utils.getPixeledAABB(5, 0, 0, 11, 1, 16)), CircuitComponents.DirectedComponentBlockItem::new);

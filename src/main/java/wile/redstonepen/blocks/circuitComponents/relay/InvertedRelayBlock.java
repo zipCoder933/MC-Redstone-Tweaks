@@ -1,4 +1,4 @@
-package wile.redstonepen.blocks.circuitComponents;
+package wile.redstonepen.blocks.circuitComponents.relay;
 
 
 import net.minecraft.core.BlockPos;
@@ -9,10 +9,11 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
+import wile.redstonepen.blocks.circuitComponents.CircuitComponents;
 
 import javax.annotation.Nullable;
 
-public class InvertedRelayBlock extends CircuitComponents.RelayBlock {
+public class InvertedRelayBlock extends RelayBlock {
     public InvertedRelayBlock(long config, Properties builder, AABB aabb) {
         super(config, builder, aabb);
     }

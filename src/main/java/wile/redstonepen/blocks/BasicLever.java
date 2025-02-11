@@ -30,13 +30,8 @@ import wile.redstonepen.libmc.Utils;
 import javax.annotation.Nullable;
 import java.util.List;
 
-
 @SuppressWarnings("deprecation")
 public class BasicLever {
-    //--------------------------------------------------------------------------------------------------------------------
-    // DirectedComponentBlock
-    //--------------------------------------------------------------------------------------------------------------------
-
     public static class BasicLeverBlock extends net.minecraft.world.level.block.LeverBlock {
         public record Config(float sound_pitch_unpowered, float sound_pitch_powered) {
         }
@@ -77,5 +72,4 @@ public class BasicLever {
             }
         }
     }
-
 }
