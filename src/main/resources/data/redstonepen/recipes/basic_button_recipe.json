@@ -1,8 +1,12 @@
 {
   "type": "redstonepen:crafting_extended_shapeless",
   "ingredients": [
-    { "tag": "minecraft:wooden_buttons" },
-    { "item": "minecraft:bone_block" }
+    {
+      "tag": "minecraft:wooden_buttons"
+    },
+    {
+      "item": "minecraft:bone_block"
+    }
   ],
   "result": {
     "item": "redstonepen:basic_button"

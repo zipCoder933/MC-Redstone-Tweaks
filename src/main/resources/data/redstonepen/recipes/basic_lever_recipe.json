@@ -1,22 +1,17 @@
 {
-  "type": "redstonepen:crafting_extended_shapeless",
-  "ingredients": [
-    {
-      "item": "minecraft:lever"
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "S",
+    "D"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:stick"
     },
-    {
-      "item": "minecraft:iron_ingot"
-    },
-    {
-      "item": "minecraft:cobbled_deepslate"
-    },
-    {
-      "item": "minecraft:cobbled_deepslate"
-    },
-    {
+    "D": {
       "item": "minecraft:cobbled_deepslate"
     }
-  ],
+  },
   "result": {
     "item": "redstonepen:basic_lever"
   }
