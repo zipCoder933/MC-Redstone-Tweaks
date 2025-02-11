@@ -2,7 +2,10 @@
   "type": "redstonepen:crafting_extended_shapeless",
   "ingredients": [
     { "tag": "minecraft:wooden_buttons" },
-    { "item": "minecraft:bone_block" }
+    { "item": "minecraft:iron_ingot" },
+    { "item": "minecraft:iron_ingot" },
+    { "item": "minecraft:iron_ingot" },
+    { "item": "minecraft:iron_ingot" }
   ],
   "result": {
     "item": "redstonepen:basic_button"

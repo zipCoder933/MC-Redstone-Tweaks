@@ -1,1 +1,6 @@
-{ "parent": "redstonepen:block/basic_button_off" }
+{
+  "parent": "minecraft:block/button_inventory",
+  "textures": {
+    "texture": "minecraft:block/bone_block_top"
+  }
+}

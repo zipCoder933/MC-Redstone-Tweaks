@@ -5,10 +5,7 @@
       "item": "redstonepen:basic_button"
     },
     {
-      "item": "minecraft:iron_ingot"
-    },
-    {
-      "item": "minecraft:bone_block"
+      "item": "minecraft:iron_block"
     }
   ],
   "result": {

@@ -1,1 +1,6 @@
-{ "parent": "redstonepen:block/basic_pulse_button_off" }
+{
+  "parent": "minecraft:block/button_inventory",
+  "textures": {
+    "texture": "redstonepen:block/brass"
+  }
+}
