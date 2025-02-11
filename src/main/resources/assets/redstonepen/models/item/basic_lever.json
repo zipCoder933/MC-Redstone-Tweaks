@@ -1,1 +1,6 @@
-{ "parent": "redstonepen:block/basic_lever_off" }
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "redstonepen:block/lever"
+  }
+}

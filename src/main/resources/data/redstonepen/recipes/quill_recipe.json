@@ -1,14 +1,14 @@
 {
   "type": "redstonepen:crafting_extended_shapeless",
   "ingredients": [
-    { "item": "minecraft:redstone" },
-    { "item": "minecraft:redstone" },
-    { "item": "minecraft:redstone" },
-    { "item": "minecraft:redstone" },
-    { "item": "minecraft:redstone" },
-    { "item": "minecraft:redstone" },
-    { "item": "minecraft:redstone" },
-    { "item": "minecraft:redstone" },
+    { "item": "minecraft:redstone_block" },
+    { "item": "minecraft:redstone_block" },
+    { "item": "minecraft:redstone_block" },
+    { "item": "minecraft:redstone_block" },
+    { "item": "minecraft:redstone_block" },
+    { "item": "minecraft:redstone_block" },
+    { "item": "minecraft:redstone_block" },
+    { "item": "minecraft:feather" },
     { "item": "minecraft:feather" }
   ],
   "result": {

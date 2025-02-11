@@ -2,7 +2,7 @@
   "type": "redstonepen:crafting_extended_shapeless",
   "ingredients": [
     {
-      "item": "redstonepen:basic_button"
+      "tag": "redstonepen:basic_button"
     },
     {
       "item": "minecraft:iron_ingot"

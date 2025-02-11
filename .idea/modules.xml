@@ -4,8 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/RedstoneTweaks.main.iml" filepath="$PROJECT_DIR$/.idea/modules/RedstoneTweaks.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/RedstoneTweaks.test.iml" filepath="$PROJECT_DIR$/.idea/modules/RedstoneTweaks.test.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/redstonePen.main.iml" filepath="$PROJECT_DIR$/.idea/modules/redstonePen.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/redstonePen.test.iml" filepath="$PROJECT_DIR$/.idea/modules/redstonePen.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/org.zipcoder.RedstoneTweaks.test.iml" filepath="$PROJECT_DIR$/.idea/modules/org.zipcoder.RedstoneTweaks.test.iml" />
     </modules>
   </component>
 </project>

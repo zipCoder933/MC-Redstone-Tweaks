@@ -6,7 +6,7 @@
     "III"
   ],
   "key": {
-    "C": { "item": "minecraft:smooth_stone" },
+    "C": { "item": "minecraft:cobblestone" },
     "T": { "item": "minecraft:redstone_torch" },
     "D": { "item": "minecraft:redstone" },
     "I": { "item": "minecraft:iron_block" }
