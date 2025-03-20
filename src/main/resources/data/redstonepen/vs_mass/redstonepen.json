@@ -1,0 +1,54 @@
+[
+  {
+    "tag": "redstonepen:track",
+    "mass": 0.0,
+    "priority": 101
+  },
+  {
+    "tag": "redstonepen:basic_button",
+    "mass": 2.0,
+    "priority": 101
+  },
+  {
+    "tag": "redstonepen:basic_pulse_button",
+    "mass": 2.0,
+    "priority": 101
+  },
+  {
+    "tag": "redstonepen:basic_lever",
+    "mass": 10.0,
+    "priority": 101
+  },
+  {
+    "tag": "redstonepen:relay",
+    "mass": 100.0,
+    "priority": 101
+  },
+  {
+    "tag": "redstonepen:inverted_relay",
+    "mass": 100.0,
+    "priority": 101
+  },
+  {
+    "tag": "redstonepen:bistable_relay",
+    "mass": 100.0,
+    "priority": 101
+  },
+  {
+    "tag": "redstonepen:pulse_relay",
+    "mass": 100.0,
+    "priority": 101
+  },
+  {
+    "tag": "redstonepen:bridge_relay",
+    "mass": 100.0,
+    "priority": 101
+  },
+  {
+    "block": "redstonepen:control_box",
+    "mass": 100.0,
+    "friction": 0.0,
+    "elasticity": 0.0,
+    "priority": 101
+  }
+]
