@@ -40,8 +40,11 @@ import wile.redstonepen.libmc.Utils;
 import wile.redstonepen.libmc.Overlay;
 import wile.redstonepen.libmc.RsSignals;
 import wile.redstonepen.libmc.StandardBlocks;
+import zipCoder.redstonetweaks.Config;
+
 import javax.annotation.Nullable;
 import java.util.*;
+
 import static zipCoder.redstonetweaks.RedstoneTweaks.MOD_LOGGER;
 
 @SuppressWarnings("deprecation")
@@ -477,6 +480,7 @@ public class CircuitComponents {
         @Override
         public void inventoryTick(ItemStack stack, Level world, Entity entity, int itemSlot, boolean isSelected) {
             if ((!isSelected) || (!world.isClientSide) || !(entity instanceof Player player)) return;
+            if(!Config.circuitCompOverlay) return;
             // temp fix 1.20.4 neoforge
             {
                 final var inv = player.getInventory();
